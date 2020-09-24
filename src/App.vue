@@ -1,19 +1,58 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" @mouseover="update">
+    <li v-for="item in items" :key="item.message">
+      <ul>
+        <FolioNode
+        :x="item * x/items.length"
+        :y="Math.sin(item+index)*100 + y"
+        :color="'#0000AA'"
+        />
+      </ul>
+    </li>
+    <li v-for="item in items" :key="item.message">
+      <ul>
+        <FolioNode
+        :x="item * x/items.length"
+        :y="Math.sin(item+index+3)*200 + y"
+        :color="'#AA0000'"
+        />
+      </ul>
+    </li>
+    <li v-for="item in items" :key="item.message">
+      <ul>
+        <FolioNode
+        :x="item * x/items.length"
+        :y="Math.sin(item+index+30)*170 + y"
+        :color="'#00AA00'"
+        />
+      </ul>
+    </li>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FolioNode from './components/FolioNode';
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
-  }
-}
+    FolioNode,
+  }, 
+  methods: {
+    update: function() {
+      this.index += 1
+      console.log("test")
+    }
+  },
+
+  data: () => ({
+    x: window.innerWidth,
+    y: window.innerHeight/2,
+    items:[1,2,3,4,5,6,7,8,9,10,11],
+    index:0
+  }),
+};
 </script>
 
 <style>
